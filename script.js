@@ -3,21 +3,66 @@
 
 //1 Save the value
 //Let's query the dom the form element and save it as a variable
-// Let's query the dom for the input
-
+const formElement = document.querySelector('form');
+ // Let's query the dom for the input
+ const inputElement = document.querySelector('input');
+ // Let's query the dom for the ul
+ const ulElement = document.querySelector('ul');
 
 
 //2 Attach a submit event listener to the form element
- //Pass in 2 argument the event listener method
-   //a) the event you are listing for
-   //b)The callback fucntion which will hold the logic we wish to run once the event is heard (AKA occurs on the page)
+   //Pass in 2 argument the event listener method
+      //a) the event you are listing for
+      //b)The callback fucntion which will hold the logic we wish to run once the event is heard (AKA occurs on the page)
 
-//Save the text value from the input within a variable
+  formElement.addEventListener('submit',function(event){
+         
+       
+   //Defaut behavior of submit is to refresh, so we need to tell the page not to do it
+    event.preventDefault();
+    console.log(event);
+   
+   //Save the entered text value from the input within a variable
+     const userAnswer = inputElement.value;
+  
 
-   //  if the user submit an item (check wether the value of the input is not empty), then do some thing:
-      // Create a li element
+    //  NOTE: A form will always return a value as string
+       //  if the user submit an item (check wether the value of the input is not empty), then do some thing:
+       //console.log(userAnswer); Check the userAnswer value
+       if (
+        userAnswer !== ""){
+             // Create a li element
+        const liElement= document.createElement('li');
+
         // a font awesome to it
+        liElement.innerHTML = '<i class="fa-regular fa-square"></i>';
+      
+        // liElement.textContent = userAnswer; this will not work>>>> becaus etext content replace everything, so the <i> will be replaced with the text
+       const itemText = document.createTextNode(userAnswer);
+            liElement.appendChild(itemText);
         // add the text from the item to the li
-        
-        //Append the li element to the ul element 
-   //    else alert the user to submit a valid data
+          // console.log(liElement);
+        //Append the li element to the ul element
+         ulElement.appendChild(liElement);
+
+         //clear the input when submitted
+         inputElement.value ="";
+        }
+        //    else alert the user to submit a valid data
+        else{
+            alert('Please enter an item you want to add');
+        }
+       
+      
+ 
+
+  } )
+
+
+
+
+
+
+
+
+
